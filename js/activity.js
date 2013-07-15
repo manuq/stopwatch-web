@@ -1,5 +1,6 @@
 define(function (require) {
     var activity = require("sugar-web/activity/activity");
+    var mustache = require("mustache");
 
     // Manipulate the DOM only when it is ready.
     require(['domReady!'], function (doc) {
@@ -13,7 +14,17 @@ define(function (require) {
             window.msRequestAnimationFrame;
 
         function Stopwatch() {
-            this.elem = document.getElementById('stopwatch-01');
+            this.elem = document.createElement('div');
+            var stopwatchList = document.getElementById('stopwatch-list');
+            stopwatchList.appendChild(this.elem);
+
+            this.template =
+                '<p class="counter">00:00:00</p>' +
+                '<button class="start-stop-button">Start</button>' +
+                '<button class="reset-button">Reset</button>';
+
+            this.elem.innerHTML = mustache.render(this.template, {});
+
             this.counter = this.elem.querySelector('.counter');
             this.running = false;
             this.previousTime = Date.now();
@@ -97,6 +108,8 @@ define(function (require) {
         }
 
         var stopwatch = new Stopwatch();
+        stopwatch = new Stopwatch();
+        stopwatch = new Stopwatch();
 
     });
 
