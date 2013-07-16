@@ -13,6 +13,10 @@
   margin-bottom: 11px;
 }
 
+#stopwatch-list li {
+  position: relative;
+}
+
 #stopwatch-list li p {
   line-height: 1.2;
 }
@@ -30,4 +34,28 @@
   text-align: center;
   font-weight: bold;
   /* font-size: 20px; */
+}
+
+button.remove {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 42px;
+  height: 42px;
+  background-color: transparent;
+  background-position: center;
+  background-size: 22px 22px;
+  background-repeat: no-repeat;
+  background-image: url(../icons/list-remove.svg);
+  border: 0;
+  border-radius: 0;
+}
+
+#add-stopwatch {
+  width: 84px;
+  height: 42px;
+  background-position: center;
+  background-size: 22px 22px;
+  background-repeat: no-repeat;
+  background-image: url(../icons/list-add.svg);
 }

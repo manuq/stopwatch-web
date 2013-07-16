@@ -36,7 +36,8 @@ define(function (require) {
                 '<button class="start-stop-button">Start</button>' +
                 '<button class="mark-button">Mark</button>' +
                 '<button class="reset-button">Reset</button>' +
-                '<p class="marks"></p>';
+                '<p class="marks"></p>' +
+                '<button class="remove"></button>';
 
             this.elem.innerHTML = mustache.render(this.template, {});
 
@@ -65,6 +66,11 @@ define(function (require) {
             this.resetButton.onclick = function () {
                 that.onResetClicked();
             };
+
+            this.removeButton = this.elem.querySelector('.remove');
+            this.removeButton.onclick = function () {
+                that.onRemoveClicked();
+            };
         }
 
         Stopwatch.prototype.onStartStopClicked = function () {
@@ -91,6 +97,11 @@ define(function (require) {
             if (!this.running) {
                 this.updateView();
             }
+        };
+
+        Stopwatch.prototype.onRemoveClicked = function () {
+            var stopwatchList = document.getElementById('stopwatch-list');
+            stopwatchList.removeChild(this.elem);
         };
 
         Stopwatch.prototype.tick = function () {
@@ -149,6 +160,12 @@ define(function (require) {
         for (var i = 0; i < 5; i++) {
             new Stopwatch();
         }
+
+        // Button to add more stopwatches.
+        var addButton = document.getElementById('add-stopwatch');
+        addButton.onclick = function () {
+            new Stopwatch();
+        };
     });
 
 });
