@@ -20,29 +20,38 @@ define(function (require) {
 
             this.template =
                 '<p class="counter">00:00:00</p>' +
+                '<p class="marks"></p>' +
                 '<button class="start-stop-button">Start</button>' +
+                '<button class="mark-button">Mark</button>' +
                 '<button class="reset-button">Reset</button>';
 
             this.elem.innerHTML = mustache.render(this.template, {});
 
-            this.counter = this.elem.querySelector('.counter');
+            this.counterElem = this.elem.querySelector('.counter');
+            this.marksElem = this.elem.querySelector('.marks');
             this.running = false;
             this.previousTime = Date.now();
             this.tenthsOfSecond = 0;
             this.seconds = 0;
             this.minutes = 0;
+            this.marks = [];
 
             var that = this;
 
             this.startStopButton = this.elem.querySelector('.start-stop-button');
             this.startStopButton.onclick = function () {
                 that.onStartStopClicked();
-            }
+            };
+
+            this.markButton = this.elem.querySelector('.mark-button');
+            this.markButton.onclick = function () {
+                that.onMarkClicked();
+            };
 
             this.resetButton = this.elem.querySelector('.reset-button');
             this.resetButton.onclick = function () {
                 that.onResetClicked();
-            }
+            };
         }
 
         Stopwatch.prototype.onStartStopClicked = function () {
@@ -54,7 +63,13 @@ define(function (require) {
                 this.running = false;
             }
             this.updateButtons();
-        }
+        };
+
+        Stopwatch.prototype.onMarkClicked = function () {
+            this.marks.push(this.minutes + ':' + this.seconds + '.' +
+                            this.tenthsOfSecond);
+            this.updateMarks();
+        };
 
         Stopwatch.prototype.onResetClicked = function () {
             this.tenthsOfSecond = 0;
@@ -63,7 +78,7 @@ define(function (require) {
             if (!this.running) {
                 this.updateView();
             }
-        }
+        };
 
         Stopwatch.prototype.tick = function () {
             if (!this.running) {
@@ -79,7 +94,7 @@ define(function (require) {
             }
 
             requestAnimationFrame(this.tick.bind(this));
-        }
+        };
 
         Stopwatch.prototype.update = function () {
             this.tenthsOfSecond += 1;
@@ -91,12 +106,22 @@ define(function (require) {
                 this.seconds = 0;
                 this.minutes += 1;
             }
-        }
+        };
 
         Stopwatch.prototype.updateView = function () {
-            this.counter.innerHTML = this.minutes + ':' + this.seconds + '.' +
-                this.tenthsOfSecond;
-        }
+            this.counterElem.innerHTML = this.minutes + ':' +
+                this.seconds + '.' + this.tenthsOfSecond;
+        };
+
+        Stopwatch.prototype.updateMarks = function () {
+            this.marksElem.innerHTML = '';
+            for (var i = 0; i < this.marks.length; i++) {
+                this.marksElem.innerHTML += this.marks[i];
+                if (i !== (this.marks.length -1)) {
+                    this.marksElem.innerHTML += ' - ';
+                }
+            }
+        };
 
         Stopwatch.prototype.updateButtons = function () {
             if (this.running) {
@@ -105,12 +130,12 @@ define(function (require) {
             else {
                 this.startStopButton.innerHTML = "Start";
             }
+        };
+
+        // Start with five stopwatches.
+        for (var i = 0; i < 5; i++) {
+            new Stopwatch();
         }
-
-        var stopwatch = new Stopwatch();
-        stopwatch = new Stopwatch();
-        stopwatch = new Stopwatch();
-
     });
 
 });
