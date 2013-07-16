@@ -1,3 +1,33 @@
 #main-toolbar #activity-button {
   background-image: url(../activity/activity-icon.svg);
 }
+
+#stopwatch-app {
+  text-align: center;
+  margin: 0 55px;
+}
+
+#stopwatch-list {
+  text-align: left;
+  margin-top: 11px;
+  margin-bottom: 11px;
+}
+
+#stopwatch-list li p {
+  line-height: 1.2;
+}
+
+.counter, .marks {
+  display: inline-block;
+}
+
+.marks {
+  margin-left: 11px;
+}
+
+.counter {
+  width: 110px;
+  text-align: center;
+  font-weight: bold;
+  /* font-size: 20px; */
+}

@@ -14,16 +14,16 @@ define(function (require) {
             window.msRequestAnimationFrame;
 
         function Stopwatch() {
-            this.elem = document.createElement('div');
+            this.elem = document.createElement('li');
             var stopwatchList = document.getElementById('stopwatch-list');
             stopwatchList.appendChild(this.elem);
 
             this.template =
                 '<p class="counter">00:00:00</p>' +
-                '<p class="marks"></p>' +
                 '<button class="start-stop-button">Start</button>' +
                 '<button class="mark-button">Mark</button>' +
-                '<button class="reset-button">Reset</button>';
+                '<button class="reset-button">Reset</button>' +
+                '<p class="marks"></p>';
 
             this.elem.innerHTML = mustache.render(this.template, {});
 
