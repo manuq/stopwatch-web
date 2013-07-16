@@ -13,6 +13,19 @@ define(function (require) {
             window.webkitRequestAnimationFrame ||
             window.msRequestAnimationFrame;
 
+        // Utility to fill a string number with zeros.
+        function pad(n, width, z) {
+            z = z || '0';
+            width = width || 2;
+            n = n + '';
+            if (n.length >= width) {
+                return n;
+            }
+            else {
+                return new Array(width - n.length + 1).join(z) + n;
+            }
+        }
+
         function Stopwatch() {
             this.elem = document.createElement('li');
             var stopwatchList = document.getElementById('stopwatch-list');
@@ -66,8 +79,8 @@ define(function (require) {
         };
 
         Stopwatch.prototype.onMarkClicked = function () {
-            this.marks.push(this.minutes + ':' + this.seconds + '.' +
-                            this.tenthsOfSecond);
+            this.marks.push(pad(this.minutes) + ':' + pad(this.seconds) + '.' +
+                            pad(this.tenthsOfSecond));
             this.updateMarks();
         };
 
@@ -109,8 +122,8 @@ define(function (require) {
         };
 
         Stopwatch.prototype.updateView = function () {
-            this.counterElem.innerHTML = this.minutes + ':' +
-                this.seconds + '.' + this.tenthsOfSecond;
+            this.counterElem.innerHTML = pad(this.minutes) + ':' +
+                pad(this.seconds) + '.' + pad(this.tenthsOfSecond);
         };
 
         Stopwatch.prototype.updateMarks = function () {
