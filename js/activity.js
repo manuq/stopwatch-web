@@ -37,6 +37,7 @@ define(function (require) {
                 '<button class="start-stop-button">Start</button>' +
                 '<button class="reset-button">Reset</button>' +
                 '<button class="mark-button">Mark</button>' +
+                '<button class="clear-marks-button">Clear marks</button>' +
                 '</div>' +
                 '<p class="marks"></p>' +
                 '<button class="remove"></button>';
@@ -59,14 +60,19 @@ define(function (require) {
                 that.onStartStopClicked();
             };
 
+            this.resetButton = this.elem.querySelector('.reset-button');
+            this.resetButton.onclick = function () {
+                that.onResetClicked();
+            };
+
             this.markButton = this.elem.querySelector('.mark-button');
             this.markButton.onclick = function () {
                 that.onMarkClicked();
             };
 
-            this.resetButton = this.elem.querySelector('.reset-button');
-            this.resetButton.onclick = function () {
-                that.onResetClicked();
+            this.clearButton = this.elem.querySelector('.clear-marks-button');
+            this.clearButton.onclick = function () {
+                that.onClearMarksClicked();
             };
 
             this.removeButton = this.elem.querySelector('.remove');
@@ -86,12 +92,6 @@ define(function (require) {
             this.updateButtons();
         };
 
-        Stopwatch.prototype.onMarkClicked = function () {
-            this.marks.push(pad(this.minutes) + ':' + pad(this.seconds) + '.' +
-                            pad(this.tenthsOfSecond));
-            this.updateMarks();
-        };
-
         Stopwatch.prototype.onResetClicked = function () {
             this.tenthsOfSecond = 0;
             this.seconds = 0;
@@ -99,6 +99,17 @@ define(function (require) {
             if (!this.running) {
                 this.updateView();
             }
+        };
+
+        Stopwatch.prototype.onMarkClicked = function () {
+            this.marks.push(pad(this.minutes) + ':' + pad(this.seconds) + '.' +
+                            pad(this.tenthsOfSecond));
+            this.updateMarks();
+        };
+
+        Stopwatch.prototype.onClearMarksClicked = function () {
+            this.marks = [];
+            this.updateMarks();
         };
 
         Stopwatch.prototype.onRemoveClicked = function () {
