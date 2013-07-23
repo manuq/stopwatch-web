@@ -36,6 +36,26 @@
   /* font-size: 20px; */
 }
 
+.buttons-group {
+  display: inline-block;
+}
+
+.buttons-group button {
+  border-radius: 0;
+  margin-left: 0;
+  margin-right: 0;
+}
+
+.buttons-group button:first-child {
+  border-radius: 22px 0 0 22px;
+  margin-right: 0;
+}
+
+.buttons-group button:last-child {
+  border-radius: 0 22px 22px 0;
+  margin-left: 0;
+}
+
 button.remove {
   position: absolute;
   top: 0;

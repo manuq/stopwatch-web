@@ -33,9 +33,11 @@ define(function (require) {
 
             this.template =
                 '<p class="counter">00:00:00</p>' +
+                '<div class="buttons-group">' +
                 '<button class="start-stop-button">Start</button>' +
-                '<button class="mark-button">Mark</button>' +
                 '<button class="reset-button">Reset</button>' +
+                '<button class="mark-button">Mark</button>' +
+                '</div>' +
                 '<p class="marks"></p>' +
                 '<button class="remove"></button>';
 
