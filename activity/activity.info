@@ -1,5 +1,5 @@
 [Activity]
-name = Stopwatch Activity
+name = Stopwatch
 activity_version = 1
 bundle_id = org.sugarlabs.StopwatchActivity
 exec = sugar-activity-web
