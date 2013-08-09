@@ -34,10 +34,10 @@ define(function (require) {
             this.template =
                 '<p class="counter">00:00:00</p>' +
                 '<div class="buttons-group">' +
-                '<button class="start-stop-button">Start</button>' +
-                '<button class="reset-button">Reset</button>' +
-                '<button class="mark-button">Mark</button>' +
-                '<button class="clear-marks-button">Clear marks</button>' +
+                '<button class="start-stop-button start"></button>' +
+                '<button class="reset-button"></button>' +
+                '<button class="mark-button"></button>' +
+                '<button class="clear-marks-button"></button>' +
                 '</div>' +
                 '<p class="marks"></p>' +
                 '<button class="remove"></button>';
@@ -162,10 +162,12 @@ define(function (require) {
 
         Stopwatch.prototype.updateButtons = function () {
             if (this.running) {
-                this.startStopButton.innerHTML = "Stop";
+                this.startStopButton.classList.add("stop");
+                this.startStopButton.classList.remove("start");
             }
             else {
-                this.startStopButton.innerHTML = "Start";
+                this.startStopButton.classList.add("start");
+                this.startStopButton.classList.remove("stop");
             }
         };
 
